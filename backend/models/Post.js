@@ -34,7 +34,7 @@ const postSchema = new mongoose.Schema(
   }
 );
 
-// Virtual for author relationship
+
 postSchema.virtual("author", {
   ref: "User",
   localField: "authorId",
@@ -42,29 +42,27 @@ postSchema.virtual("author", {
   justOne: true,
 });
 
-// Index for better query performance
 postSchema.index({ authorId: 1, createdAt: -1 });
 postSchema.index({ title: "text", content: "text" });
 
-// Pre-save middleware to update updatedAt
+
 postSchema.pre("save", function (next) {
   this.updatedAt = Date.now();
   next();
 });
 
-// Static method to get posts with author info
+
 postSchema.statics.findWithAuthor = function (query = {}) {
   return this.find(query)
     .populate("authorId", "name email")
     .sort({ createdAt: -1 });
 };
 
-// Static method to get single post with author info
+
 postSchema.statics.findByIdWithAuthor = function (id) {
   return this.findById(id).populate("authorId", "name email");
 };
 
-// Instance method to check if user is author
 postSchema.methods.isAuthor = function (userId) {
   return this.authorId.toString() === userId.toString();
 };

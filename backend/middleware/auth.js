@@ -1,23 +1,23 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
-// Protect routes - require authentication
+
 const protect = async (req, res, next) => {
   let token;
 
-  // Check for token in headers
+ 
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
   ) {
     try {
-      // Get token from header
+     
       token = req.headers.authorization.split(" ")[1];
 
-      // Verify token
+     
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-      // Get user from token
+      
       const user = await User.findById(decoded.id).select("-password");
 
       if (!user) {
@@ -43,7 +43,6 @@ const protect = async (req, res, next) => {
   }
 };
 
-// Optional auth - doesn't require authentication but adds user if available
 const optionalAuth = async (req, res, next) => {
   let token;
 
@@ -60,7 +59,7 @@ const optionalAuth = async (req, res, next) => {
         req.user = user;
       }
     } catch (error) {
-      // Token is invalid, but we don't fail the request
+      
       console.error("Optional auth token error:", error);
     }
   }
@@ -68,7 +67,6 @@ const optionalAuth = async (req, res, next) => {
   next();
 };
 
-// Check if user is author of post
 const isAuthor = async (req, res, next) => {
   try {
     const Post = require("../models/Post");
@@ -80,7 +78,7 @@ const isAuthor = async (req, res, next) => {
       });
     }
 
-    // Check if user is the author
+    
     if (!post.isAuthor(req.user._id)) {
       return res.status(403).json({
         error: "Not authorized, you can only modify your own posts",
