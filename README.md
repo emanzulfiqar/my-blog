@@ -2,22 +2,37 @@
 A full-stack blog management application with authentication, rich text editing, and modern UI/UX. Built with Node.js/Express backend and React/Next.js frontend.
 
 📌 Features Overview
+
 ✅ Backend
+
 JWT Authentication with secure token storage
+
 MongoDB with Mongoose ODM
+
 RESTful API with Express.js
+
 Role-based post management
+
 Input validation and error handling
+
 Security: rate limiting, helmet, CORS
+
 Search, pagination, and API documentation
 
 ✅ Frontend
+
 React.js 18 App Router (or CRA-based optional UI)
+
 Authentication & protected routes
+
 Zustand for state management
+
 Rich text editing with React Quill
+
 Responsive UI with Tailwind CSS & Bootstrap
+
 Form validation with Zod + React Hook Form
+
 Toast notifications and clean UI/UX
 
 🏗️ Project Architecture
@@ -35,8 +50,11 @@ blog-management/
 │   ├── services/           # API services
 │   └── lib/                # API configuration
 └── README.md               # You're here!
+
 🚀 Getting Started
+
 ✅ Prerequisites
+
 Node.js v18+
 
 MongoDB (local or Atlas)
@@ -44,6 +62,7 @@ MongoDB (local or Atlas)
 npm or yarn
 
 🔧 Backend Setup (/backend)
+
 Navigate to the backend directory:
 
 cd backend
@@ -91,18 +110,26 @@ Auto login from localStorage/session
 
 📚 API Endpoints Summary
 Auth
+
 POST /api/auth/register – Register new user
+
 POST /api/auth/login – Login and receive token
 
 
 Posts
+
 GET /api/posts – Get all posts with optional search, pagination
+
 GET /api/posts/:id – Get single post
+
 POST /api/posts – Create post (auth)
+
 PUT /api/posts/:id – Update post (owner only)
+
 DELETE /api/posts/:id – Delete post (owner only)
 
 🧱 Project Structure
+
 📦 Backend (/backend)
 
 models/          # Mongoose models: User, Post
@@ -112,44 +139,70 @@ server.js        # Main app setup
 .env             # Environment config
 💻 Frontend (/frontend)
 
+
 app/             # Pages and routing (Next.js App Router)
+
 components/      # UI components (Header, BlogList, etc.)
+
 store/           # Zustand state management
+
 services/        # API service functions
+
 lib/             # Axios configuration
+
 .env.local       # API endpoint config
+
 🛡 Security Features
+
 Backend
+
 JWT token authentication
+
 bcrypt password hashing
+
 Helmet for headers
+
 CORS config
+
 Express rate limiter
+
 MongoDB injection prevention
 
 Frontend
+
 Client-side route protection
+
 Zod + React Hook Form validation
+
 Token stored securely (localStorage or cookies)
+
 XSS prevention via editor sanitization
 
 🧪 Testing
+
 Backend
+
 Jest + Supertest
+
 Authentication test cases
+
 MongoDB in-memory for testing
 
 Frontend
+
 Form and component tests
 
 🛠 Development Commands
+
 Backend
+
 npm run dev        # Start dev server
 npm test           # Run tests
 npm start          # Start prod server
 
 
 Frontend
+
 npm run dev        # Start dev server
 npm run build      # Build for production
 npm run start      # Start prod server
@@ -157,6 +210,7 @@ npm run lint       # Code linting
 
 
 Production Env
+
 .env (backend)
 
 PORT=5000
