@@ -47,31 +47,6 @@ export default function PostPage() {
       setIsLoading(false);
     }
   };
-  //   toast((t) => (
-  //     <div>
-  //       <p className="font-medium">Are you sure you want to delete this post?</p>
-  //       <div className="mt-2 flex justify-end space-x-2">
-  //         <button
-  //           onClick={() => {
-  //             toast.dismiss(t.id);
-  //             performDelete();
-  //           }}
-  //           className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm"
-  //         >
-  //           Yes
-  //         </button>
-  //         <button
-  //           onClick={() => toast.dismiss(t.id)}
-  //           className="bg-gray-300 hover:bg-gray-400 text-black px-3 py-1 rounded text-sm"
-  //         >
-  //           No
-  //         </button>
-  //       </div>
-  //     </div>
-  //   ), {
-  //     duration: 10000,
-  //   });
-  // };
   const handleConfirmDelete = async () => {
     try {
       setIsDeleting(true);
