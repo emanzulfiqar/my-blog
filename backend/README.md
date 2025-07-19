@@ -110,11 +110,11 @@ The frontend will run on `http://localhost:3000`
 
 ### Frontend Features
 
-- ✅ Modern React/Next.js with TypeScript
+- ✅ Modern React.js
 - ✅ Zustand state management
 - ✅ React Quill rich text editor
 - ✅ Form validation with Zod
-- ✅ Responsive design with Tailwind CSS
+- ✅ Responsive design with Bootstrap and Tailwind CSS
 - ✅ Toast notifications
 - ✅ Protected routes
 - ✅ Real-time updates
@@ -142,9 +142,9 @@ The frontend will run on `http://localhost:3000`
 
 ### Frontend
 
-- **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
+- **Framework**: React.js 18 (App Router)
+- **Language**: JavaScript
+- **Styling**: Tailwind CSS and Bootstrap
 - **State Management**: Zustand
 - **Forms**: React Hook Form + Zod
 - **Rich Text**: React Quill
@@ -432,7 +432,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- Next.js team for the amazing framework
+- React.js team for the amazing framework
 - Express.js for the robust backend framework
 - MongoDB for the flexible database
 - Bootstrap and Tailwind CSS for the utility-first styling
