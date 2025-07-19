@@ -1,0 +1,1127 @@
+{
+  "info": {
+    "name": "Blog Management API",
+    "description": "Complete API collection for testing the Blog Management Backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
+        }
+      },
+      "response": [
+        {
+          "name": "Success Response",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"status\": \"OK\",\n  \"message\": \"Blog Management API is running\",\n  \"timestamp\": \"2023-07-17T10:00:00.000Z\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Test User\",\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "register"]
+            }
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Test User\",\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/register",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "register"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"User registered successfully\",\n  \"data\": {\n    \"user\": {\n      \"id\": \"60f7b3b3b3b3b3b3b3b3b3b3\",\n      \"name\": \"Test User\",\n      \"email\": \"test@example.com\",\n      \"createdAt\": \"2023-07-17T10:00:00.000Z\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZjdiM2IzYjNiM2IzYjNiM2IzYjNiMiIsImlhdCI6MTYyNjU5NjAwMCwiZXhwIjoxNjI3MjAxNjAwfQ.example\"\n  }\n}"
+            },
+            {
+              "name": "Validation Error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"\",\n  \"email\": \"invalid-email\",\n  \"password\": \"123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/register",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "register"]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"error\": \"Validation failed\",\n  \"details\": [\n    {\n      \"field\": \"name\",\n      \"message\": \"Name must be between 2 and 50 characters\",\n      \"value\": \"\"\n    },\n    {\n      \"field\": \"email\",\n      \"message\": \"Please provide a valid email\",\n      \"value\": \"invalid-email\"\n    },\n    {\n      \"field\": \"password\",\n      \"message\": \"Password must be at least 6 characters long\",\n      \"value\": \"123\"\n    }\n  ]\n}"
+            },
+            {
+              "name": "User Already Exists",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Test User\",\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/register",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "register"]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"error\": \"User with this email already exists\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Login User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "login"]
+            }
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/login",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "login"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Login successful\",\n  \"data\": {\n    \"user\": {\n      \"id\": \"60f7b3b3b3b3b3b3b3b3b3b3\",\n      \"name\": \"Test User\",\n      \"email\": \"test@example.com\",\n      \"createdAt\": \"2023-07-17T10:00:00.000Z\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZjdiM2IzYjNiM2IzYjNiM2IzYjNiMiIsImlhdCI6MTYyNjU5NjAwMCwiZXhwIjoxNjI3MjAxNjAwfQ.example\"\n  }\n}"
+            },
+            {
+              "name": "Invalid Credentials",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"wrongpassword\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/login",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "login"]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"error\": \"Invalid credentials\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/me",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "me"]
+            }
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/me",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "me"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"data\": {\n    \"user\": {\n      \"id\": \"60f7b3b3b3b3b3b3b3b3b3b3\",\n      \"name\": \"Test User\",\n      \"email\": \"test@example.com\",\n      \"createdAt\": \"2023-07-17T10:00:00.000Z\"\n    }\n  }\n}"
+            },
+            {
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/me",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "me"]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"error\": \"Not authorized, no token\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Test User\",\n  \"email\": \"updated@example.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/profile",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "profile"]
+            }
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Updated Test User\",\n  \"email\": \"updated@example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/profile",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "profile"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Profile updated successfully\",\n  \"data\": {\n    \"user\": {\n      \"id\": \"60f7b3b3b3b3b3b3b3b3b3b3\",\n      \"name\": \"Updated Test User\",\n      \"email\": \"updated@example.com\",\n      \"createdAt\": \"2023-07-17T10:00:00.000Z\"\n    }\n  }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Blog Posts",
+      "item": [
+        {
+          "name": "Get All Posts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/posts?page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["posts"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/posts?page=1&limit=10",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["posts"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"data\": {\n    \"posts\": [\n      {\n        \"_id\": \"60f7b3b3b3b3b3b3b3b3b3b4\",\n        \"title\": \"My First Blog Post\",\n        \"content\": \"<h1>Welcome to my blog!</h1><p>This is my first blog post with <strong>rich text</strong> content.</p>\",\n        \"authorId\": {\n          \"_id\": \"60f7b3b3b3b3b3b3b3b3b3b3\",\n          \"name\": \"Test User\",\n          \"email\": \"test@example.com\"\n        },\n        \"createdAt\": \"2023-07-17T10:00:00.000Z\",\n        \"updatedAt\": \"2023-07-17T10:00:00.000Z\",\n        \"isAuthor\": false\n      },\n      {\n        \"_id\": \"60f7b3b3b3b3b3b3b3b3b3b5\",\n        \"title\": \"Another Blog Post\",\n        \"content\": \"<p>This is another blog post with <em>different content</em>.</p>\",\n        \"authorId\": {\n          \"_id\": \"60f7b3b3b3b3b3b3b3b3b3b6\",\n          \"name\": \"Another User\",\n          \"email\": \"another@example.com\"\n        },\n        \"createdAt\": \"2023-07-17T09:00:00.000Z\",\n        \"updatedAt\": \"2023-07-17T09:00:00.000Z\",\n        \"isAuthor\": false\n      }\n    ],\n    \"pagination\": {\n      \"currentPage\": 1,\n      \"totalPages\": 1,\n      \"totalPosts\": 2,\n      \"hasNextPage\": false,\n      \"hasPrevPage\": false\n    }\n  }\n}"
+            },
+            {
+              "name": "Empty Posts",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/posts?page=1&limit=10",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["posts"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"data\": {\n    \"posts\": [],\n    \"pagination\": {\n      \"currentPage\": 1,\n      \"totalPages\": 0,\n      \"totalPosts\": 0,\n      \"hasNextPage\": false,\n      \"hasPrevPage\": false\n    }\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get All Posts with Search",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/posts?search=javascript&page=1&limit=5",
+              "host": ["{{baseUrl}}"],
+              "path": ["posts"],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "javascript"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Search Results",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/posts?search=javascript&page=1&limit=5",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["posts"],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "javascript"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"data\": {\n    \"posts\": [\n      {\n        \"_id\": \"60f7b3b3b3b3b3b3b3b3b3b7\",\n        \"title\": \"JavaScript Best Practices\",\n        \"content\": \"<h1>JavaScript Tips</h1><p>Here are some <strong>JavaScript</strong> best practices for modern development.</p>\",\n        \"authorId\": {\n          \"_id\": \"60f7b3b3b3b3b3b3b3b3b3b3\",\n          \"name\": \"Test User\",\n          \"email\": \"test@example.com\"\n        },\n        \"createdAt\": \"2023-07-17T08:00:00.000Z\",\n        \"updatedAt\": \"2023-07-17T08:00:00.000Z\",\n        \"isAuthor\": false\n      }\n    ],\n    \"pagination\": {\n      \"currentPage\": 1,\n      \"totalPages\": 1,\n      \"totalPosts\": 1,\n      \"hasNextPage\": false,\n      \"hasPrevPage\": false\n    }\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Single Post",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/posts/{{postId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["posts", "{{postId}}"]
+            }
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/posts/60f7b3b3b3b3b3b3b3b3b3b4",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["posts", "60f7b3b3b3b3b3b3b3b3b3b4"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"data\": {\n    \"post\": {\n      \"_id\": \"60f7b3b3b3b3b3b3b3b3b3b4\",\n      \"title\": \"My First Blog Post\",\n      \"content\": \"<h1>Welcome to my blog!</h1><p>This is my first blog post with <strong>rich text</strong> content.</p><p>I can include:</p><ul><li>Bullet points</li><li>Formatted text</li><li>Links and more</li></ul>\",\n      \"authorId\": {\n        \"_id\": \"60f7b3b3b3b3b3b3b3b3b3b3\",\n        \"name\": \"Test User\",\n        \"email\": \"test@example.com\"\n      },\n      \"createdAt\": \"2023-07-17T10:00:00.000Z\",\n      \"updatedAt\": \"2023-07-17T10:00:00.000Z\",\n      \"isAuthor\": false\n    }\n  }\n}"
+            },
+            {
+              "name": "Post Not Found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/posts/invalid-id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["posts", "invalid-id"]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"error\": \"Post not found\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Create Post",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"My First Blog Post\",\n  \"content\": \"<h1>Welcome to my blog!</h1><p>This is my first blog post with <strong>rich text</strong> content.</p><p>I can include:</p><ul><li>Bullet points</li><li>Formatted text</li><li>Links and more</li></ul>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/posts",
+              "host": ["{{baseUrl}}"],
+              "path": ["posts"]
+            }
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"My First Blog Post\",\n  \"content\": \"<h1>Welcome to my blog!</h1><p>This is my first blog post with <strong>rich text</strong> content.</p><p>I can include:</p><ul><li>Bullet points</li><li>Formatted text</li><li>Links and more</li></ul>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/posts",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["posts"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Post created successfully\",\n  \"data\": {\n    \"post\": {\n      \"_id\": \"60f7b3b3b3b3b3b3b3b3b3b4\",\n      \"title\": \"My First Blog Post\",\n      \"content\": \"<h1>Welcome to my blog!</h1><p>This is my first blog post with <strong>rich text</strong> content.</p><p>I can include:</p><ul><li>Bullet points</li><li>Formatted text</li><li>Links and more</li></ul>\",\n      \"authorId\": {\n        \"_id\": \"60f7b3b3b3b3b3b3b3b3b3b3\",\n        \"name\": \"Test User\",\n        \"email\": \"test@example.com\"\n      },\n      \"createdAt\": \"2023-07-17T10:00:00.000Z\",\n      \"updatedAt\": \"2023-07-17T10:00:00.000Z\",\n      \"isAuthor\": true\n    }\n  }\n}"
+            },
+            {
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Unauthorized Post\",\n  \"content\": \"This should fail\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/posts",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["posts"]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"error\": \"Not authorized, no token\"\n}"
+            },
+            {
+              "name": "Validation Error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"\",\n  \"content\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/posts",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["posts"]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"error\": \"Validation failed\",\n  \"details\": [\n    {\n      \"field\": \"title\",\n      \"message\": \"Title must be between 1 and 200 characters\",\n      \"value\": \"\"\n    },\n    {\n      \"field\": \"content\",\n      \"message\": \"Content cannot be empty\",\n      \"value\": \"\"\n    }\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update Post",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated Blog Post Title\",\n  \"content\": \"<h1>Updated Content</h1><p>This post has been <em>updated</em> with new content!</p><blockquote>This is a quote from the updated post.</blockquote>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/posts/{{postId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["posts", "{{postId}}"]
+            }
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Updated Blog Post Title\",\n  \"content\": \"<h1>Updated Content</h1><p>This post has been <em>updated</em> with new content!</p><blockquote>This is a quote from the updated post.</blockquote>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/posts/60f7b3b3b3b3b3b3b3b3b3b4",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["posts", "60f7b3b3b3b3b3b3b3b3b3b4"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Post updated successfully\",\n  \"data\": {\n    \"post\": {\n      \"_id\": \"60f7b3b3b3b3b3b3b3b3b3b4\",\n      \"title\": \"Updated Blog Post Title\",\n      \"content\": \"<h1>Updated Content</h1><p>This post has been <em>updated</em> with new content!</p><blockquote>This is a quote from the updated post.</blockquote>\",\n      \"authorId\": {\n        \"_id\": \"60f7b3b3b3b3b3b3b3b3b3b3\",\n        \"name\": \"Test User\",\n        \"email\": \"test@example.com\"\n      },\n      \"createdAt\": \"2023-07-17T10:00:00.000Z\",\n      \"updatedAt\": \"2023-07-17T11:00:00.000Z\",\n      \"isAuthor\": true\n    }\n  }\n}"
+            },
+            {
+              "name": "Not Authorized",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Unauthorized Update\",\n  \"content\": \"This should fail\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/posts/60f7b3b3b3b3b3b3b3b3b3b5",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["posts", "60f7b3b3b3b3b3b3b3b3b3b5"]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"error\": \"Not authorized, you can only modify your own posts\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Delete Post",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/posts/{{postId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["posts", "{{postId}}"]
+            }
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/posts/60f7b3b3b3b3b3b3b3b3b3b4",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["posts", "60f7b3b3b3b3b3b3b3b3b3b4"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Post deleted successfully\"\n}"
+            },
+            {
+              "name": "Not Authorized",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/posts/60f7b3b3b3b3b3b3b3b3b3b5",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["posts", "60f7b3b3b3b3b3b3b3b3b3b5"]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"error\": \"Not authorized, you can only modify your own posts\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get User's Posts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/posts/user/me?page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["posts", "user", "me"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/posts/user/me?page=1&limit=10",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["posts", "user", "me"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"data\": {\n    \"posts\": [\n      {\n        \"_id\": \"60f7b3b3b3b3b3b3b3b3b3b4\",\n        \"title\": \"My First Blog Post\",\n        \"content\": \"<h1>Welcome to my blog!</h1><p>This is my first blog post with <strong>rich text</strong> content.</p>\",\n        \"authorId\": {\n          \"_id\": \"60f7b3b3b3b3b3b3b3b3b3b3\",\n          \"name\": \"Test User\",\n          \"email\": \"test@example.com\"\n        },\n        \"createdAt\": \"2023-07-17T10:00:00.000Z\",\n        \"updatedAt\": \"2023-07-17T10:00:00.000Z\",\n        \"isAuthor\": true\n      },\n      {\n        \"_id\": \"60f7b3b3b3b3b3b3b3b3b3b7\",\n        \"title\": \"JavaScript Best Practices\",\n        \"content\": \"<h1>JavaScript Tips</h1><p>Here are some <strong>JavaScript</strong> best practices for modern development.</p>\",\n        \"authorId\": {\n          \"_id\": \"60f7b3b3b3b3b3b3b3b3b3b3\",\n          \"name\": \"Test User\",\n          \"email\": \"test@example.com\"\n        },\n        \"createdAt\": \"2023-07-17T08:00:00.000Z\",\n        \"updatedAt\": \"2023-07-17T08:00:00.000Z\",\n        \"isAuthor\": true\n      }\n    ],\n    \"pagination\": {\n      \"currentPage\": 1,\n      \"totalPages\": 1,\n      \"totalPosts\": 2,\n      \"hasNextPage\": false,\n      \"hasPrevPage\": false\n    }\n  }\n}"
+            },
+            {
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/posts/user/me?page=1&limit=10",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["posts", "user", "me"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"error\": \"Not authorized, no token\"\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000/api",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "your-jwt-token-here",
+      "type": "string"
+    },
+    {
+      "key": "postId",
+      "value": "your-post-id-here",
+      "type": "string"
+    }
+  ]
+}
