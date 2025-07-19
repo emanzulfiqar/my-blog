@@ -428,8 +428,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👨‍💻 Author
 
 **Eman Zulfiqar**
-
-- Email: hr@bxtrack.com
 - GitHub: https://github.com/emanzulfiqar
 
 ## 🙏 Acknowledgments
